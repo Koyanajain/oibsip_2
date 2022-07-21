@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <style>
+       .center-flex
+       {
+           display:flex;
+           justify-content: center;
+           align-items: center;
+           height: 100vh;
+       }
+       table
+       {
+           border-spacing: 0;
+       }
+       td{
+           font-size: 35px;
+           width: 80px;
+           height: 80px;
+           text-align: center;
+       }
+       .bt
+       {
+           border-top: 3px solid gray;
+       }
+       .br
+       {
+           border-right: 3px solid gray;
+       }
+       .X
+       {
+           color: red;
+       }
+       .O
+       {
+           color: yellowgreen;
+       }
+       #winner
+       {
+           display: none;
+           justify-content: center;
+           align-items: center;
+           height: 100vh;
+           background-color: aqua;
+           position: relative;
+       }
+       #title
+       {
+           padding: 20px;
+           background-color: blue;
+           border-radius: 5px;
+       }
+       .but
+       {
+           position: absolute;
+           bottom: 200px;
+           background-color: yellow;
+           padding: 10px;
+       }
+     
+
+   </style>
+</head>
+<body>
+    <div class="center-flex" id="parent">
+        <table>
+            <tr>
+                <td id="t00" class="br" onclick="disp(this)"></td>
+                <td id="t01" class="br" onclick="disp(this)"></td>
+                <td id="t02" onclick="disp(this)"></td>
+            </tr>
+            <tr>
+                <td id="t10" class="br bt" onclick="disp(this)"></td>
+                <td id="t11" class="br bt" onclick="disp(this)"></td>
+                <td id="t12" class="bt" onclick="disp(this)"></td>
+            </tr>
+            <tr>
+                <td id="t20" class="br bt" onclick="disp(this)"></td>
+                <td id="t21" class="br bt" onclick="disp(this)"></td>
+                <td id="t22" class="bt" onclick="disp(this)"></td>
+            </tr>
+
+        </table>
+    </div>
+    <div id="winner">
+        <h1 id="title"></h1>
+        <button class="but" onclick="location.reload()">Restart The Game</button>
+    </div>
+
+    <script>
+        player='X';
+        com_count=0;
+        function disp(ref)
+        {
+            if(ref.innerHTML.length==0)
+            {
+                ref.innerHTML=player;
+                ref.classList.add(player);
+
+                if(player=='X')
+                {
+                    player='O';
+                    winnerloop('X');
+                }
+                else
+                {
+                    player='X';
+                    winnerloop('O');
+                }
+                com_count++;
+            }
+            if(com_count==9)
+            {
+                winnerloop('X');
+            }
+        }
+        function winnerloop(ply)
+        {
+            size=2;
+            for(row=0;row<3;row++)
+            {
+                col_count=0;
+                row_count=0;
+                diag_right_count=0;
+                diag_left_count=0;
+
+                for(col=0;col<3;col++)
+                {
+                    col_id=`t${row}${col}`;
+                    col_val=document.getElementById(col_id).innerHTML;
+                    if(col_val===ply)
+                    {
+                        col_count++;
+                    }
+                    row_id=`t${col}${row}`;
+                    row_val=document.getElementById(row_id).innerHTML;
+                    if(row_val===ply)
+                    {
+                        row_count++;
+                    }
+                    diag_right_id=`t${col}${col}`;
+                    diag_right_val=document.getElementById(diag_right_id).innerHTML;
+                    if(diag_right_val===ply)
+                    {
+                        diag_right_count++;
+                    }
+                    diag_left_id=`t${col}${size-col}`;
+                    diag_left_val=document.getElementById(diag_left_id).innerHTML;
+                    if(diag_left_val===ply)
+                    {
+                        diag_left_count++;
+                    }
+                }
+                if(col_count==3 || row_count==3 || diag_right_count==3 || diag_left_count==3)
+                {
+                    document.getElementById('parent').style.display='none';
+                    document.getElementById('winner').style.display='flex';
+                    document.getElementById('title').innerHTML=ply+ ' WON the Game';
+                }
+                else if(com_count>=9)
+                {
+                    document.getElementById('parent').style.display='none';
+                    document.getElementById('winner').style.display='flex';
+                    document.getElementById('title').innerHTML='No one WON the Game';
+                }
+
+            }
+            
+        }
+    </script>
+</body>
+</html>

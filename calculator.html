@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .center-flex
+        {
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            border: 2px;
+        }
+        table 
+        {
+            border-spacing: 12px;
+            border-radius: 5px;
+        }
+        .col{
+            border: 1px solid skyblue;
+            width: 50px;
+            height: 30px;
+            text-align: center;
+            font-size: 20px;
+            border-radius: 5px;
+            background-color: rgb(203, 240, 241);
+            
+        }
+        .Ent-col
+        {
+            border: 1px solid skyblue;
+            width: 50px;
+            height: 30px;
+            text-align: center;
+            font-size: 20px;
+            border-radius: 5px;
+            background-color: rgb(0, 119, 255);
+        }
+        .display
+        {
+            background-color: rgb(109, 174, 185);
+            height: 80px;
+            border: 2px solid rgb(152, 214, 233);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="center-flex">
+        <table border="1">
+            <tr >
+                <td id="screen" class="display" colspan="4"></td>
+
+            </tr>
+            <tr>
+                <td class="col" onclick="func(this)">(</td>
+                <td class="col" onclick="func(this)">)</td>
+                <td class="col" onclick="del()">del</td>
+                <td class="col" onclick="clr()">clear</td>
+            </tr>
+            <tr>
+                <td class="col" onclick="func(this)">7</td>
+                <td class="col" onclick="func(this)">8</td>
+                <td class="col" onclick="func(this)">9</td>
+                <td class="col" onclick="func(this)">/</td>
+            </tr>
+            <tr>
+                <td class="col" onclick="func(this)">4</td>
+                <td class="col" onclick="func(this)">5</td>
+                <td class="col" onclick="func(this)">6</td>
+                <td class="col" onclick="func(this)">x</td>
+            </tr>
+            <tr>
+                <td class="col" onclick="func(this)">1</td>
+                <td class="col" onclick="func(this)">2</td>
+                <td class="col" onclick="func(this)">3</td>
+                <td class="col" onclick="func(this)">-</td>
+            </tr>
+            <tr>
+                <td class="col" onclick="func(this)">.</td>
+                <td class="col" onclick="func(this)">0</td>
+                <td class="Ent-col">=</td>
+                <td class="col" onclick="func(this)">+</td>
+            </tr>
+            <tr></tr>
+
+
+        </table>
+    </div>
+
+    <script>
+        sum='';
+     
+        function func(ref)
+        {
+            sum=sum+ref.innerHTML;
+        document.getElementById('screen').innerHTML=sum;
+
+        }
+        function clr()
+        {
+            sum='';
+            document.getElementById('screen').innerHTML=sum;
+        }
+        function del()
+        {
+           
+        }
+        
+    </script>
+</body>
+</html>
